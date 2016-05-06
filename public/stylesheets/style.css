@@ -1,0 +1,12 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00b7ff;
+}
+.photo {
+  display: inline-block;
+  margin: 10px;
+  background-color: #b0e0e6;
+}
