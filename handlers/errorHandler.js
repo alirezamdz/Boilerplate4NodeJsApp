@@ -1,4 +1,4 @@
-var debug = require('debug')();
+var port = require('../utils/serverUtil').port;
 /**
  * Event listener for HTTP server "error" event.
  */
@@ -27,19 +27,6 @@ function onError(error) {
   }
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening(server) {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-}
-
 module.exports = {
-  onError: onError,
-  onListening: onListening
+  onError: onError
 }

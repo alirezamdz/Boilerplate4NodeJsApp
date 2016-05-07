@@ -1,7 +1,7 @@
 var http = require('http');
 var app = require('./applicationUtil');
 
-var port = normalizePort(process.env.PORT || '4001');
+var port = normalizePort(process.env.PORT || '7777');
 
 function createServer(rootPath, callback){
 	
