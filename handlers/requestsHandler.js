@@ -4,7 +4,7 @@ function handelHomeReq(req, res, next){
 	res.render('index', {
 		title: 'home',
 		items: db
-	});	
+	});
 }
 
 function handelHomePostReq(req, res, next){

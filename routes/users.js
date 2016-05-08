@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var usersRequestsHandler = require('../handlers/usersRequestsHandler')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+var usersUrl = '/users';
+var usersTestUrl = '/users/test';
+
+router.get(usersUrl, usersRequestsHandler.handelUserReq);
+
+router.post(usersUrl, usersRequestsHandler.handelUserPostReq);
+
+router.get(usersTestUrl, usersRequestsHandler.handelUserTestReq);
 
 module.exports = router;

@@ -10,73 +10,71 @@ var routes = require('../routes/routes');
 var users = require('../routes/users');
 var viewHelper = require('../helper/viewHelper');
 
-function createApp(rootPath, port){
+var app = express();
 
-  var app = express();
+function createApplication(rootPath, port){
 
-  configureAppSetting(app, port, rootPath);
-  configureAppMiddlewares(app, rootPath);
-  configureRouter(app);
-  configureViewHelpers(app);
+	configureAppSetting(port, rootPath);
+	configureAppMiddlewares(rootPath);
+	configureRouter();
+	configureViewHelpers();
+	configureErrorHandlers();
 
-
-  // catch 404 and forward to error handler
-  app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-  });
-
-
-  // development error handler
-  // will print stacktrace
-  if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-      res.status(err.status || 500);
-      res.render('error', {
-        message: err.message,
-        error: err
-      });
-    });
-  };
-
-  // production error handler
-  // no stacktraces leaked to user
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: {}
-    });
-  });
-
-  return app
+	return app
 };
 
-function configureAppSetting(app, port, rootPath){
-  app.set('port', port);
-  app.set('view engine', 'jade');
-  app.set('views', path.join(rootPath, 'views'));
-  app.set('view cache', false);
-  app.set('title', 'Boilerplate')
+function configureAppSetting(port, rootPath){
+	app.set('port', port);
+	app.set('view engine', 'jade');
+	app.set('views', path.join(rootPath, 'views'));
+	app.set('view cache', false);
+	app.set('title', 'Boilerplate');
 };
 
-function configureAppMiddlewares(app, rootPath){
-  //app.use(favicon(path.join(rootPath, 'public', 'favicon.ico')));
-  app.use(logger('dev'));
-  app.use(bodyParser.json());
-  app.use(cookieParser());
-  app.use(stylus.middleware(path.join(rootPath, 'public')));
-  app.use(express.static(path.join(rootPath, 'public')));
+function configureAppMiddlewares(rootPath){
+	//app.use(favicon(path.join(rootPath, 'public', 'favicon.ico')));
+	app.use(logger('dev'));
+	app.use(bodyParser.json());
+	app.use(cookieParser());
+	app.use(stylus.middleware(path.join(rootPath, 'public')));
+	app.use(express.static(path.join(rootPath, 'public')));
 
 };
 
-function configureRouter(app){
-  app.use(routes);
+function configureRouter(){
+	app.use(routes);
+	app.use(users);
 }
 
-function configureViewHelpers(app){
-  app.locals.greet = viewHelper.greet;
+function configureErrorHandlers(){
+	app.use(catch404);
+	app.use(errorHandler);
 }
 
-module.exports = createApp;
+function configureViewHelpers(){
+	app.locals.greet = viewHelper.greet;
+}
+
+function catch404(req, res, next) {
+		var err = new Error('Not Found');
+		err.status = 404;
+		next(err);
+}
+
+function errorHandler(err, req, res, next) {
+	if (app.get('env') === 'development'){
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: err
+		});
+	}else{
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: {}
+		});
+	}
+}
+
+module.exports = createApplication;
