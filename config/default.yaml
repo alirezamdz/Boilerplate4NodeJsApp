@@ -1,0 +1,7 @@
+server:
+  host: 'localhost'
+  port: 7777
+
+db:
+  host: 'localhost'
+  port: 27017

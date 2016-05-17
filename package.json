@@ -11,19 +11,21 @@
     "url": "https://github.com/alirezamdz/Boilerplate4NodeJsApp.git"
   },
   "bugs": {
-  	"url": "https://github.com/alirezamdz/Boilerplate4NodeJsApp/issues"
-	},
+    "url": "https://github.com/alirezamdz/Boilerplate4NodeJsApp/issues"
+  },
   "dependencies": {
     "body-parser": "~1.13.2",
+    "config": "^1.20.2",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "jade": "~1.11.0",
+    "js-yaml": "^3.6.1",
+    "mongoose": "~3.6.19",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "stylus": "0.42.3",
-    "mongoose": "~3.6.19"
+    "stylus": "0.42.3"
   },
-	"devDependencies": {},
+  "devDependencies": {},
   "license": "MIT"
 }

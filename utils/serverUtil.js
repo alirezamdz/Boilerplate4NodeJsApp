@@ -1,7 +1,11 @@
 var http = require('http');
 var app = require('./applicationUtil');
+var config = require('config').get('server');
+var yaml = require('js-yaml');
 
-var port = normalizePort(process.env.PORT || '7777');
+
+
+var port = normalizePort(process.env.PORT || config.port);
 
 function createServer(rootPath, callback){
 
