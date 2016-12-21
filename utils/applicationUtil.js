@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var stylus = require('stylus');
+var config = require('config');
 
 var routes = require('../routes/routes');
 var users = require('../routes/users');
@@ -28,7 +29,7 @@ function configureAppSetting(port, rootPath){
 	app.set('view engine', 'jade');
 	app.set('views', path.join(rootPath, 'views'));
 	app.set('view cache', false);
-	app.set('title', 'Boilerplate');
+	app.set('title', config.get('application').title);
 };
 
 function configureAppMiddlewares(rootPath){

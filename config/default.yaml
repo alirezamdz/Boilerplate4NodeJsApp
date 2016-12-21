@@ -1,3 +1,6 @@
+application:
+  title: 'Boilerplate'
+
 server:
   host: 'localhost'
   port: 7777
