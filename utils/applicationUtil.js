@@ -52,7 +52,9 @@ function configureErrorHandlers(){
 }
 
 function configureViewHelpers(){
-	app.locals.greet = viewHelper.greet;
+	for(var helper in viewHelper){
+		app.locals[helper] = viewHelper[helper];
+	}
 }
 
 function catch404(req, res, next) {
