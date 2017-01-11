@@ -1,7 +1,20 @@
+# Intellij
+*.iml
+.idea/*.iws
+.idea/*.xml
+.idea/tasks.xml
+.idea/codeStyleSettings.xml
+.idea/watcherTasks.xml
+.idea/libraries/*.xml
+.idea/copyright/*.xml
+.idea/dictionaries/*.xml
+.idea/runConfigurations/app_js.xml
+
 # Logs
 logs
 *.log
 npm-debug.log*
+*.swp
 
 # Runtime data
 pids
