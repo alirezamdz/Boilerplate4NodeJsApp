@@ -1,83 +1,84 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var stylus = require('stylus');
-var config = require('config');
+'use strict';
+const express = require('express');
+const appRoot = require('app-root-path').path;
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const stylus = require('stylus');
+const config = require('config');
 
-var routes = require('../routes/routes');
-var users = require('../routes/users');
-var viewHelper = require('../helper/viewHelper');
+const routes = require('../routes/routes');
+const users = require('../routes/users');
+const viewHelper = require('../helper/viewHelper');
 
-var app = express();
+const app = express();
 
-function createApplication(rootPath, port){
+const createApplication = (port) => {
+  
+  configureAppSetting(port);
+  configureAppMiddlewares();
+  configureRouter();
+  configureViewHelpers();
+  configureErrorHandlers();
 
-	configureAppSetting(port, rootPath);
-	configureAppMiddlewares(rootPath);
-	configureRouter();
-	configureViewHelpers();
-	configureErrorHandlers();
-
-	return app
+  return app
 };
 
-function configureAppSetting(port, rootPath){
-	app.set('port', port);
-	app.set('view engine', 'jade');
-	app.set('views', path.join(rootPath, 'views'));
-	app.set('view cache', false);
-	app.set('title', config.get('application').title);
+const configureAppSetting = port => {
+  app.set('port', port);
+  app.set('view engine', 'jade');
+  app.set('views', path.join(appRoot, 'views'));
+  app.set('view cache', false);
+  app.set('title', config.get('application').title);
 };
 
-function configureAppMiddlewares(rootPath){
-	//app.use(favicon(path.join(rootPath, 'public', 'favicon.ico')));
-	app.use(logger('dev'));
-	app.use(bodyParser.json());
-	app.use(cookieParser());
-	app.use(stylus.middleware(path.join(rootPath, 'public')));
-	app.use(express.static(path.join(rootPath, 'public')));
-
+const configureAppMiddlewares = () => {
+  //app.use(favicon(path.join(appRoot, 'public', 'favicon.ico')));
+  app.use(logger('dev'));
+  app.use(bodyParser.json());
+  app.use(cookieParser());
+  app.use(stylus.middleware(path.join(appRoot, 'public')));
+  app.use(express.static(path.join(appRoot, 'public')));
 };
 
-function configureRouter(){
-	app.use(routes);
-	app.use(users);
-}
+const configureRouter = () => {
+  app.use("/", routes);
+  app.use("/users", users);
+};
 
-function configureErrorHandlers(){
-	app.use(catch404);
-	app.use(errorHandler);
-}
+const configureErrorHandlers = () => {
+  app.use(catch404);
+  app.use(errorHandler);
+};
 
-function configureViewHelpers(){
-	for(var helper in viewHelper){
-		app.locals[helper] = viewHelper[helper];
-	}
-}
+const configureViewHelpers = () => {
+  for (const helper in viewHelper) {
+    app.locals[helper] = viewHelper[helper];
+  }
+};
 
-function catch404(req, res, next) {
-		var err = new Error('Not Found');
-		err.status = 404;
-		next(err);
-}
+const catch404 = (req, res, next) => {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+};
 
-function errorHandler(err, req, res, next) {
-	if (app.get('env') === 'development'){
-		res.status(err.status || 500);
-		res.render('error', {
-			message: err.message,
-			error: err
-		});
-	}else{
-		res.status(err.status || 500);
-		res.render('error', {
-			message: err.message,
-			error: {}
-		});
-	}
-}
+const errorHandler = (err, req, res, next) => {
+  if (app.get('env') === 'develsopment') {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  } else {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: {status: err.status}
+    });
+  }
+};
 
 module.exports = createApplication;
