@@ -1,22 +1,24 @@
-var db = require('../db/db');
+'use strict';
 
-function handelHomeReq(req, res, next){
-	res.render('index', {
-		title: 'home',
-		items: db
-	});
-}
+const db = require('../db/db');
 
-function handelHomePostReq(req, res, next){
-	res.send("this is post response");
-}
+const handelHomeReq = (req, res, next) => {
+  res.render('index', {
+    title: 'home',
+    items: db
+  });
+};
 
-function handelTestReq(req, res, next){
-	res.send("A response from test handler!");
-}
+const handelHomePostReq = (req, res, next) => {
+  res.send("this is post response");
+};
+
+const handelTestReq = (req, res, next) => {
+  res.send("A response from test handler!");
+};
 
 module.exports = {
-	handelHomeReq: handelHomeReq,
-	handelHomePostReq: handelHomePostReq,
-	handelTestReq: handelTestReq
-}
+  handelHomeReq,
+  handelHomePostReq,
+  handelTestReq
+};
