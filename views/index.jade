@@ -1,14 +1,11 @@
 extends layout
 
 block title
-	title= settings.title
+  title= settings.title
 
 block content
-
-	.container
-
-		.row
-			each item in items
-				.col-md-3
-					h4!= item.name
-					p!= item.content
+  .row
+    each item in items
+      .col-md-3
+        h4!= item.name
+        p!= item.content

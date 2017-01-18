@@ -1,12 +1,22 @@
 doctype html
 html
-	head
-		block title
-		link(rel='stylesheet', href='/stylesheets/vendor/bootstrap.min.css')
-		link(rel='stylesheet', href='/stylesheets/style.css')
-	body
-		block content
+  head
+    block title
+    link(rel='stylesheet', href='/stylesheets/vendor/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+
+    block header
+      nav.navbar.navbar-inverse.navbar-fixed-top
+        .container
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href="/login", title='login') login
+
+    .container.content
+      block content
 
 
-		script(src='/javascripts/vendor/jquery-2.2.3.min.js')
-		script(src='/javascripts/vendor/bootstrap.min.js')
+    script(src='/javascripts/vendor/jquery-2.2.3.min.js')
+    script(src='/javascripts/vendor/bootstrap.min.js')

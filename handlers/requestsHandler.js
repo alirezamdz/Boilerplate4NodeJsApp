@@ -2,23 +2,28 @@
 
 const db = require('../db/db');
 
-const handelHomeReq = (req, res, next) => {
+const handleHomeReq = (req, res, next) => {
   res.render('index', {
     title: 'home',
     items: db
   });
 };
 
-const handelHomePostReq = (req, res, next) => {
+const handleHomePostReq = (req, res, next) => {
   res.send("this is post response");
 };
 
-const handelTestReq = (req, res, next) => {
+const handleTestReq = (req, res, next) => {
   res.send("A response from test handler!");
 };
 
+const handleLoginPage = (req, res, next) => {
+  res.render('auth/login');
+};
+
 module.exports = {
-  handelHomeReq,
-  handelHomePostReq,
-  handelTestReq
+  handleHomeReq,
+  handleHomePostReq,
+  handleTestReq,
+  handleLoginPage
 };

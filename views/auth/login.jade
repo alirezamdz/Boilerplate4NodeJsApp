@@ -1,0 +1,19 @@
+extends ../layout
+
+block header
+  nav.navbar.navbar-inverse.navbar-fixed-top
+    .container
+      ul.nav.navbar-nav.navbar-right
+
+block content
+  .row
+    .col-sm-4
+      form(name='login', method='POST')
+        .form-group
+          label(for='inputEmail') Email address
+          input#inputEmail.form-control(type='email', placeholder='Email')
+        .form-group
+          label(for='inputPassword') Password
+          input#inputPassword.form-control(type='password', placeholder='Password')
+
+        button.btn.btn-default(type='submit') Submit
