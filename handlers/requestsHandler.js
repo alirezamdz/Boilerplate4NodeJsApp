@@ -2,13 +2,6 @@
 
 const db = require('../db/db');
 
-const handleHomeReq = (req, res, next) => {
-  res.render('index', {
-    title: 'home',
-    items: db
-  });
-};
-
 const handleHomePostReq = (req, res, next) => {
   res.send("this is post response");
 };
@@ -22,7 +15,6 @@ const handleLoginPage = (req, res, next) => {
 };
 
 module.exports = {
-  handleHomeReq,
   handleHomePostReq,
   handleTestReq,
   handleLoginPage

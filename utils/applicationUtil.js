@@ -8,7 +8,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const stylus = require('stylus');
 const config = require('config');
+const loadContentData = require('./loadContentData');
 
+const contentRoutes = require('../middlewares/handleRoutesByContentData');
 const routes = require('../routes/routes');
 const users = require('../routes/users');
 const viewHelper = require('../helper/viewHelper');
@@ -18,6 +20,7 @@ const app = express();
 const createApplication = (port) => {
   
   configureAppSetting(port);
+  loadContentData.cacheData();
   configureAppMiddlewares();
   configureRouter();
   configureViewHelpers();
@@ -44,6 +47,7 @@ const configureAppMiddlewares = () => {
 };
 
 const configureRouter = () => {
+  app.use(contentRoutes);
   app.use("/", routes);
   app.use("/users", users);
 };
@@ -66,7 +70,7 @@ const catch404 = (req, res, next) => {
 };
 
 const errorHandler = (err, req, res, next) => {
-  if (app.get('env') === 'develsopment') {
+  if (app.get('env') === 'development') {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,

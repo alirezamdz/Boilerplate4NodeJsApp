@@ -7,8 +7,6 @@ const homeUrl = '/';
 const loginUrl = /^\/login$/;
 const testUrl = '/test';
 
-router.get(homeUrl, requestsHandler.handleHomeReq);
-
 router.post(homeUrl, requestsHandler.handleHomePostReq);
 
 router.get(testUrl, requestsHandler.handleTestReq);

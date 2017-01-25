@@ -1,0 +1,36 @@
+[
+  {
+    "type": "page",
+    "name": "home",
+    "key": "page_home",
+    "path": "/",
+    "template": "index",
+    "contents": {
+      "items": [
+        {
+          "name": "Item 1",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur harum quisquam quidem dolorum sapiente eum odit rerum. Sed ducimus voluptatum optio quibusdam explicabo atque quod fugiat quia illum quidem. Ipsa?"
+        },
+        {
+          "name": "Item 2",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur harum quisquam quidem dolorum sapiente eum odit rerum. Sed ducimus voluptatum optio quibusdam explicabo atque quod fugiat quia illum quidem. Ipsa?"
+        },
+        {
+          "name": "Item 3",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur harum quisquam quidem dolorum sapiente eum odit rerum. Sed ducimus voluptatum optio quibusdam explicabo atque quod fugiat quia illum quidem. Ipsa?"
+        }
+      ]
+    }
+  },
+  {
+    "type": "page",
+    "name": "events",
+    "key": "page_events",
+    "path": "/events",
+    "template": "events",
+    "contents": {
+      "title": "This is a simple event page",
+      "headline": "This is a simple event page which it's contents stored in JSON file..."
+    }
+  }
+]
